@@ -15,6 +15,7 @@ cd /app
 mkdir -p catkin_ws/src
 cd catkin_ws/
 catkin_make
+source /app/catkin_ws/devel/setup.bash/
 
 # Clone this repo
 cd /app/catkin_ws/src
