@@ -1,7 +1,6 @@
 # A Tiny Quadrotor Simulator
 
-This is a ros-rviz based simulator for a Quadrotor. Purpose is to fully (as much as possible from the basics)
-understand and experiment with Quadrotor-drones.
+This is a ros-rviz based simulator for a Quadrotor. Purpose is to fully (as much as possible from the basics) understand and experiment with Quadrotor-drones. 
 
 
 ![](media/simple_anim.gif)
