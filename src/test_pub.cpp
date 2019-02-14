@@ -8,6 +8,9 @@ using namespace std;
 #include <std_msgs/String.h>
 #include <visualization_msgs/Marker.h>
 
+#include "utils/RosMarkerUtils.h"
+#include "utils/PoseManipUtils.h"
+
 int main(int argc, char **argv)
 {
 
@@ -24,29 +27,16 @@ int main(int argc, char **argv)
   while (ros::ok())
   {
         visualization_msgs::Marker marker;
-        marker.header.frame_id = "world";
-        marker.header.stamp = ros::Time();
-        marker.ns = "my_namespace";
+        RosMarkerUtils::init_quad_plus( marker, 1.0 );
         marker.id = 0;
-        marker.type = visualization_msgs::Marker::SPHERE;
-        marker.action = visualization_msgs::Marker::ADD;
-        marker.pose.position.x = 1;
-        marker.pose.position.y = 1;
-        marker.pose.position.z = 1;
-        marker.pose.orientation.x = 0.0;
-        marker.pose.orientation.y = 0.0;
-        marker.pose.orientation.z = 0.0;
-        marker.pose.orientation.w = 1.0;
-        marker.scale.x = 1;
-        marker.scale.y = 1;
-        marker.scale.z = 1;
-        marker.color.a = 1.0; // Don't forget to set the alpha!
-        marker.color.r = 0.0;
-        marker.color.g = 1.0;
-        marker.color.b = 0.0;
+        marker.ns = "quad_0";
 
-        marker.type = visualization_msgs::Marker::MESH_RESOURCE;
-        marker.mesh_resource = "package://teensytiny/meshmodels/quad_plus.obj";
+        RosMarkerUtils::setcolor_to_marker( 1.0, 1.0, 1.0, marker );
+        RosMarkerUtils::setposition_to_marker( 0.0 , 2.0, float(count)/10., marker );
+
+        // marker.type = visualization_msgs::Marker::MESH_RESOURCE;
+        // marker.mesh_resource = "package://teensytiny/meshmodels/quad_plus.obj";
+        cout << "publish cam\n";
         vis_pub.publish( marker );
 
         ros::spinOnce();

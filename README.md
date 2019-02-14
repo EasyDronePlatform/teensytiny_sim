@@ -4,6 +4,8 @@ This is a ros-rviz based simulator for a Quadrotor. Purpose is to fully (as much
 understand and experiment with Quadrotor-drones.
 
 
+![](media/simple_anim.gif)
+
 ## Run with docker
 I recommend running this with docker. See my [docker-images](https://cloud.docker.com/repository/docker/mpkuse/kusevisionkit). You may use my image which
 was built from ros-melodic-base.
