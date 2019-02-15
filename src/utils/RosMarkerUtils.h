@@ -44,8 +44,9 @@ public:
     static void init_line_marker( visualization_msgs::Marker &marker, const Vector3d& p1, const Vector3d& p2 );
     static void init_points_marker( visualization_msgs::Marker &marker );
 
+    /////////////////// Quadrotor Models ////////////////////////
     // Quad in plus config - you need to provide me the arm-length
-    static void init_quad_plus( visualization_msgs::Marker& marker, float L );
+    static void init_quad_plus( visualization_msgs::Marker& marker, float L, float cr=1.0, float cb=1.0, float cg=1.0 );
 
     //////////////// SET //////////////////////////
     static void setpose_to_marker( const Matrix4d& w_T_c, visualization_msgs::Marker& marker );

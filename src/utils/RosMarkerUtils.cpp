@@ -199,35 +199,64 @@ void RosMarkerUtils::init_line_marker( visualization_msgs::Marker &marker )
 
 }
 
-void RosMarkerUtils::init_quad_plus( visualization_msgs::Marker& marker, float L )
+void RosMarkerUtils::init_quad_plus( visualization_msgs::Marker& marker, float L, float cr, float  cb, float  cg )
 {
     RosMarkerUtils::init_line_marker( marker );
 
-    marker.scale.x = 0.04;
+    marker.scale.x = 0.04; //thickness of the line
 
     // Add colors
-    std_msgs::ColorRGBA c_red, c_green, c_white;
+    std_msgs::ColorRGBA c_red, c_green, c_blue, c_white;
     c_red.r=1.0; c_red.g=0.0; c_red.b = 0.0; c_red.a=1.0;
     c_green.r=0.0; c_green.g=1.0; c_green.b = 0.0; c_green.a=1.0;
-    c_white.r=1.0; c_white.g=1.0; c_white.b = 1.0; c_white.a=1.0;
+    c_blue.r=0.0; c_blue.g=0.0; c_blue.b = 1.0; c_blue.a=1.0;
+    c_white.r=cr; c_white.g=cg; c_white.b = cb; c_white.a=1.0;
 
 
 
-    // At points
-    geometry_msgs::Point p_zero;
+
+    // co-ordinate system (body)
+    #if 1
+
+    geometry_msgs::Point p_zero, p_xax, p_yax, p_zax;
+    float axis_len = 0.2*L;
     p_zero.x = 0.0; p_zero.y = 0.0 ; p_zero.z = 0.0;
+    p_xax.x = axis_len; p_xax.y = 0.0 ; p_xax.z = 0.0;
+    p_yax.x = 0.0; p_yax.y = axis_len ; p_yax.z = 0.0;
+    p_zax.x = 0.0; p_zax.y = 0.0 ; p_zax.z = axis_len;
 
+    marker.points.push_back( p_zero );
+    marker.points.push_back( p_xax );
+    marker.colors.push_back( c_red );
+    marker.colors.push_back( c_red );
+
+    marker.points.push_back( p_zero );
+    marker.points.push_back( p_yax );
+    marker.colors.push_back( c_green );
+    marker.colors.push_back( c_green );
+
+    marker.points.push_back( p_zero );
+    marker.points.push_back( p_zax );
+    marker.colors.push_back( c_blue );
+    marker.colors.push_back( c_blue );
+    #endif
+
+
+
+    // drone structure
+    #if 1
+    // At points
     geometry_msgs::Point p;
     p.x = L; p.y = 0.0 ; p.z = 0.0;
     marker.points.push_back( p_zero );
     marker.points.push_back( p );
-    marker.colors.push_back( c_red );
+    marker.colors.push_back( c_white );
     marker.colors.push_back( c_red );
 
     p.x = 0.0; p.y = L ; p.z = 0.0;
     marker.points.push_back( p_zero );
     marker.points.push_back( p );
-    marker.colors.push_back( c_green );
+    marker.colors.push_back( c_white );
     marker.colors.push_back( c_green );
 
     p.x = -L; p.y = 0.0 ; p.z = 0.0;
@@ -241,6 +270,7 @@ void RosMarkerUtils::init_quad_plus( visualization_msgs::Marker& marker, float L
     marker.points.push_back( p );
     marker.colors.push_back( c_white );
     marker.colors.push_back( c_white );
+    #endif
 
 
     // drone landing gear
@@ -274,11 +304,6 @@ void RosMarkerUtils::init_quad_plus( visualization_msgs::Marker& marker, float L
     marker.colors.push_back( c_white );
     marker.colors.push_back( c_white );
     #endif
-
-
-
-
-
 }
 
 void RosMarkerUtils::init_line_marker( visualization_msgs::Marker &marker, const Vector3d& p1, const Vector3d& p2 )

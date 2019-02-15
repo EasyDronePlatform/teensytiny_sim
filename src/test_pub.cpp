@@ -31,8 +31,9 @@ int main(int argc, char **argv)
         marker.id = 0;
         marker.ns = "quad_0";
 
-        RosMarkerUtils::setcolor_to_marker( 1.0, 1.0, 1.0, marker );
-        RosMarkerUtils::setposition_to_marker( 0.0 , 2.0, float(count)/10., marker );
+        // RosMarkerUtils::setcolor_to_marker( 1.0, 1.0, 1.0, marker );
+        // RosMarkerUtils::setposition_to_marker( 0.0 , 2.0, float(count)/10., marker );
+        RosMarkerUtils::setposition_to_marker( 0.0 , 2.0, 1.1, marker );
 
         // marker.type = visualization_msgs::Marker::MESH_RESOURCE;
         // marker.mesh_resource = "package://teensytiny/meshmodels/quad_plus.obj";
